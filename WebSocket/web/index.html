@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script>
+            var ws = null;
+		
+            window.onload = function(){
+               var txtMsjs = document.getElementById("txtMsjs");
+               ws = new WebSocket
+                ("ws://localhost:8080/WebSocket/websocketendpoint");
+               ws.onopen = function() {                                    
+                  
+                  txtMsjs.value = "El servidor se ha levantado correctamente";
+               };
+               ws.onmessage = function (evt) { 
+                  var received_msg = evt.data;
+                  var txtMsjs = document.getElementById("txtMsjs");
+                  txtMsjs.value += "\n"+received_msg;
+               };
+            }
+        </script>
+        <style>
+    #container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    #txtMsjs {
+        width: 50%;
+        height: 50%;
+    }
+</style>
+    </head>
+   <body>
+    <div id="container">
+        <textarea id="txtMsjs"></textarea>
+    </div>        
+</body>
+</html>
